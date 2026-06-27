@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Analytics Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <nav class="top-nav">
+        <div class="brand">
+          <div class="brand-mark">📊</div>
+          <div>
+            <h1>User Analytics Dashboard</h1>
+            <p>Local DevOps Phase 1</p>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard">
+        <section class="hero-card">
+          <div>
+            <p class="eyebrow">Interactive user insights</p>
+            <h2>Discover patterns across the university user dataset.</h2>
+            <p class="hero-copy">
+              This local dashboard summarizes user counts, age trends, occupations,
+              and gender distribution with polished visual analytics.
+            </p>
+          </div>
+        </section>
+
+        <section class="summary-grid">
+          <article class="summary-card">
+            <div class="card-icon">👥</div>
+            <div class="card-body">
+              <h3>Total Users</h3>
+              <p class="counter" data-target="{{ dashboard_data.total_users }}">0</p>
+            </div>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon">🎂</div>
+            <div class="card-body">
+              <h3>Average Age</h3>
+              <p class="counter" data-target="{{ dashboard_data.average_age }}" data-decimals="1">0</p>
+            </div>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon">🌱</div>
+            <div class="card-body">
+              <h3>Youngest User</h3>
+              <p class="counter" data-target="{{ dashboard_data.youngest_user }}">0</p>
+            </div>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon">🧓</div>
+            <div class="card-body">
+              <h3>Oldest User</h3>
+              <p class="counter" data-target="{{ dashboard_data.oldest_user }}">0</p>
+            </div>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon">♂️</div>
+            <div class="card-body">
+              <h3>Male Users</h3>
+              <p class="counter" data-target="{{ dashboard_data.male_users }}">0</p>
+            </div>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon">♀️</div>
+            <div class="card-body">
+              <h3>Female Users</h3>
+              <p class="counter" data-target="{{ dashboard_data.female_users }}">0</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="chart-grid">
+          <article class="chart-card">
+            <h3>Occupation Distribution</h3>
+            <canvas id="occupationChart"></canvas>
+          </article>
+
+          <article class="chart-card">
+            <h3>Age Distribution</h3>
+            <canvas id="ageChart"></canvas>
+          </article>
+
+          <article class="chart-card">
+            <h3>Male vs Female</h3>
+            <canvas id="genderChart"></canvas>
+          </article>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>Built with Flask, Pandas, and Chart.js for a local DevOps Phase 1 experience.</p>
+      </footer>
+    </div>
+
+    <script>
+      window.dashboardData = {{ dashboard_data | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
