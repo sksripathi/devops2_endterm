@@ -30,5 +30,5 @@ def index():
 
 if __name__ == "__main__":
     initialize_dashboard_data()
-    print("[TERMINAL] Starting Flask server on http://127.0.0.1:5000", flush=True)
-    app.run(host="127.0.0.1", port=5000)
+    print("[TERMINAL] Starting Flask server on http://0.0.0.0:5000", flush=True)
+    app.run(host="0.0.0.0", port=5000)
