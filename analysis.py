@@ -18,14 +18,17 @@ def download_dataset() -> None:
     """Download the dataset from S3 if it is not already present locally."""
     logger.info("Checking local dataset")
     logger.info("Dataset path: %s", DATA_PATH)
+    print(f"[TERMINAL] Checking dataset at: {DATA_PATH}", flush=True)
 
     if DATA_PATH.exists():
         logger.info("Using local dataset")
+        print(f"[TERMINAL] Dataset already available locally at: {DATA_PATH}", flush=True)
         return
 
     logger.info("Connecting to AWS S3")
     logger.info("Bucket: %s", S3_BUCKET_NAME)
     logger.info("Object: %s", DATASET_FILE)
+    print(f"[TERMINAL] Fetching dataset from S3 bucket: {S3_BUCKET_NAME} / {DATASET_FILE}", flush=True)
 
     if not S3_BUCKET_NAME or not AWS_ACCESS_KEY_ID or not AWS_SECRET_ACCESS_KEY:
         logger.warning(
@@ -44,6 +47,7 @@ def download_dataset() -> None:
             region_name=os.getenv("AWS_REGION", AWS_REGION),
         )
         s3_client.download_file(S3_BUCKET_NAME, DATASET_FILE, str(DATA_PATH))
+        print(f"[TERMINAL] Dataset fetched successfully and saved to: {DATA_PATH}", flush=True)
         logger.info("Download complete")
         logger.info("Dataset file exists: %s", DATA_PATH.exists())
     except (ClientError, ParamValidationError) as e:
