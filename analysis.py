@@ -6,7 +6,11 @@ import boto3
 import pandas as pd
 from botocore.exceptions import ClientError, ParamValidationError
 
-from config import AWS_ACCESS_KEY_ID, AWS_REGION, AWS_SECRET_ACCESS_KEY, DATASET_FILE, S3_BUCKET_NAME
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_REGION = os.getenv("AWS_REGION", "ap-south-1")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
+DATASET_FILE = os.getenv("DATASET_FILE", "u.user")
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
